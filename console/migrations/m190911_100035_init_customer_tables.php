@@ -33,9 +33,9 @@ class m190911_100035_init_customer_tables extends Migration
   `post_index` varchar(12) NOT NULL,
   `country` varchar(2) NOT NULL,
   `city` varchar(100) NOT NULL,
-  `street` int(100) NOT NULL,
+  `street` varchar(100) NOT NULL,
   `house` varchar(4) NOT NULL,
-  `appartament` varchar(4) NOT NULL
+  `appartament` varchar(4) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ");
         $this->execute("ALTER TABLE `addreses`
