@@ -33,14 +33,14 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_login', 'post_index', 'country', 'city', 'street', 'house', 'appartament','street'], 'required'],
+            [['customer_login', 'post_index', 'country', 'city', 'street', 'house','street'], 'required'],
             [['customer_login'], 'string', 'max' => 50],
             [['post_index'], 'number'],
             [['post_index'], 'string', 'max' => 12],
-            [['country'], 'match', 'pattern' => '/^\[A-Z]{2}$/', 'message' => 'Field must contain exactly 2 uppercase letters.'],
+            [['country'], 'match', 'pattern' => '/[A-Z]{2}$/', 'message' => 'Field must contain exactly 2 uppercase letters.'],
             [['city'], 'string', 'max' => 100],
             [['house', 'appartament'], 'string', 'max' => 4],
-            [['customer_login'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_login' => 'login']],
+           // [['customer_login'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_login' => 'login']],
         ];
     }
 

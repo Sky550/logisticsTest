@@ -43,7 +43,8 @@ class Customer extends \yii\db\ActiveRecord
             [['login'],'string','min' => 4],
             [['password'], 'string', 'max' => 255,'min' => 6],
             [['email'], 'string', 'max' => 254],
-            [['name','surname'], 'match', 'pattern' => '/^\p{Lu}+/u', 'message' => 'Field must contain exactly 2 uppercase letters.'],
+            [['email'],'email'],
+            [['name','surname'], 'match', 'pattern' => '/^\p{Lu}+/u', 'message' => 'Field must start from uppercase letters.'],
             [['email'], 'unique'],
             [['login'], 'unique'],
         ];
@@ -62,6 +63,8 @@ class Customer extends \yii\db\ActiveRecord
             'sex' => Yii::t('app', 'Sex'),
             'date' => Yii::t('app', 'Date'),
             'email' => Yii::t('app', 'Email'),
+            'sexvalue'=> Yii::t('app', 'Sex'),
+            'dateiso' => Yii::t('app', 'Date'),
         ];
     }
 
@@ -71,5 +74,18 @@ class Customer extends \yii\db\ActiveRecord
     public function getAddress()
     {
         return $this->hasMany(Address::className(), ['customer_login' => 'login']);
+    }
+    public static function getSexInfo(){
+        return [
+            self::NOT_ANSWERED => Yii::t('app','n/a'),
+            self::MALE => Yii::t('app','Male') ,
+            self::FEMALE => Yii::t('app','Female') ,
+            ];
+    }
+    public function getSexvalue(){
+        return $this->getSexInfo()[$this->sex];
+    }
+    public function getDateiso(){
+        return date('d-m-Y H:i',strtotime($this->date));
     }
 }
